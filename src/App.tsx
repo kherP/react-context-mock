@@ -1,16 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { LanguageContext } from './contexts/LanguageContext';
-import { LanguageMenu } from './components/LanguageMenu';
+import { Menu } from './components/Menu';
+import { ThemeContext } from './contexts/ThemeContext';
+
+import './App.css';
 
 function App() {
+  const [theme, setTheme] = React.useState<string>("light");
   const [language, setLanguage] = React.useState<string>("en");
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
-      <h2>current language: {language}</h2>
-      <LanguageMenu />
-    </LanguageContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <LanguageContext.Provider value={{ language, setLanguage }}>
+        <h2>current language: {language}</h2>
+        <h3>current theme: {theme}</h3>
+        <Menu />
+      </LanguageContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 
